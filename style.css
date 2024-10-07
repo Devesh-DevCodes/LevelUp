@@ -1,0 +1,94 @@
+html {
+  font-size: 62.5%;
+  user-select: none;
+  
+}
+body {
+  font-size: 1.6rem;
+}
+.heading{
+    text-align: center;
+    color: #4e0388f6;
+}
+.container {
+  display: flex;
+  flex-direction: column;
+  width: fit-content;
+  width: 30rem;
+  margin: auto;
+  padding: 2rem;
+  gap: 1rem;
+  align-items: center;
+  background-color: #cfe6e994;
+  background-color: #a182c54f;
+  border-radius: 2rem;
+
+  & img {
+    width: 15rem;
+    border-radius: 50%;
+  }
+  & input,
+  & button {
+    box-sizing: border-box;
+    width: 25rem;
+    padding: 0 1.5rem;
+    height: 5rem;
+    margin-top: 2rem;
+    border-style: none;
+    border-radius: 1rem;
+    font-size: 2rem;
+  }
+
+  & button {
+    margin: 0;
+    background-color: #9563ca73;
+    border-style: groove;
+  }
+  & button:hover {
+    cursor: pointer;
+    background-color: #a071d3e5;
+  }
+  h1 {
+    margin-right: 4rem;
+  }
+}
+#todo_list {
+  /* display: grid; */
+  /* grid-template-columns: repeat(3, auto); */
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+  list-style-type: auto;
+  gap: 1rem;
+
+  & li {
+    box-sizing: border-box;
+    /* background-color: #d4e9ed; */
+    /* border: 1px solid #d4e9ed; */
+    box-shadow: 1px 2px 4px 0px;
+    width: 20rem;
+    border-radius: 1rem;
+    margin: 1.5rem;
+    padding: 1rem 4rem 1rem;
+    position: relative;
+    font-size: 20px;
+    cursor: pointer;
+  }
+}
+li i {
+  position: absolute;
+  left: 1rem; /* Adjust the distance from the left side */
+  cursor: pointer;
+  color: #000000;
+}
+li:hover{
+    background-color: #b98fe8e1;;
+}
+.bi-check-circle-fill::before {
+  content: "\f26a";
+  color: #079226;
+}
+li span{
+  display: flex;
+  overflow: auto;
+}

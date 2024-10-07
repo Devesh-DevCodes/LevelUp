@@ -1,0 +1,18 @@
+{
+    "name": "Dream Chaser",
+    "short_name": "Dream Chaser",
+    "version":"0.0.1",
+    "manifest_version":3,
+    "action":{
+        "default_popup":"index.html",
+        "default_icon":"favicon_io/logo-121x128.png"
+
+    },
+    "permissions":["activeTab"],
+
+    "icons": 
+      {
+        "128":"favicon_io/logo-121x128.png"
+      }
+  }
+  
