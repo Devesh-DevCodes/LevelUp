@@ -8,7 +8,8 @@ body {
 }
 .heading{
     text-align: center;
-    color: #4e0388f6;
+    /* color: #4e0388f6; */
+    color: #6607aed3;
 }
 .container {
   display: flex;
@@ -91,4 +92,21 @@ li:hover{
 li span{
   display: flex;
   overflow: auto;
+}
+
+.user-info {
+  display: flex;
+  align-items: center;
+  margin-top: 10px;
+}
+
+.user-info img {
+  border-radius: 50%;
+  width: 50px; /* Adjust size as necessary */
+  height: 50px; /* Adjust size as necessary */
+  margin-right: 10px;
+}
+
+button {
+  margin: 10px 0;
 }
