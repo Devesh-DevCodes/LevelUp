@@ -1,6 +1,6 @@
 // Import the functions you need from the SDKs you need
 import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
-import { getFirestore, collection, addDoc,  onSnapshot, deleteDoc,query,where , orderBy } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js"; 
+import { getFirestore, collection, addDoc,  onSnapshot, deleteDoc,query,where , orderBy , enableIndexedDbPersistence} from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js"; 
 import { getAuth, signInWithPopup, GoogleAuthProvider, signOut } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js";
 
 // Your web app's Firebase configuration
@@ -20,6 +20,17 @@ const db = getFirestore(app); // Initialize Firestore
 const auth = getAuth(app); // Initialize Firebase Authentication
 const provider = new GoogleAuthProvider();
 
+// Enable offline persistence
+enableIndexedDbPersistence(db)
+  .catch((err) => {
+    if (err.code == 'failed-precondition') {
+      console.error("Persistence failed. Multiple tabs are open.");
+    } else if (err.code == 'unimplemented') {
+      console.error("Persistence is not available in this browser.");
+    }
+  });
+
+
 // DOM Elements
 let input_obj = document.getElementById("input-obj");
 let btn_add = document.getElementById("btn-add");
@@ -30,15 +41,20 @@ let logout_btn = document.getElementById("logout-btn");
 
 // Login with Google
 login_btn.addEventListener("click", async () => {
-    try {
-        const result = await signInWithPopup(auth, provider);
-        console.log("User logged in: ", result.user);
-        login_btn.style.display = "none";
-        logout_btn.style.display = "block";
-        loadTasks();
-    } catch (error) {
-        console.error("Error during login: ", error);
-    }
+  try {
+      const result = await signInWithPopup(auth, provider);
+      console.log("User logged in: ", result.user);
+      login_btn.style.display = "none";
+      logout_btn.style.display = "block";
+      loadTasks();
+  } catch (error) {
+      if (error.code === 'auth/popup-closed-by-user') {
+          console.warn("The authentication popup was closed by the user.");
+          alert("The login popup was closed. Please try again.");
+      } else {
+          console.error("Error during login: ", error);
+      }
+  }
 });
 
 // Logout
@@ -53,7 +69,7 @@ logout_btn.addEventListener("click", async () => {
 // Add Task
 btn_add.addEventListener("click", async () => {
   let input_value = input_obj.value;
-  if (input_value === "") {
+  if (input_value.trim() === "") {
       alert("Enter a task!");
   } else {
       try {
@@ -100,8 +116,10 @@ function loadTasks() {
               listItem.innerHTML = `<i class="bi bi-check2-circle"></i> <span>${task}</span>`;
 
               listItem.addEventListener("dblclick", async () => {
-                  await deleteDoc(doc.ref); // Delete task on double click
-              });
+                    if (confirm("Are you sure you want to delete this task?")) {
+                        await deleteDoc(doc.ref); // Delete task on double click
+                    }
+                });
               todo_list.appendChild(listItem);
           });
       });
@@ -110,31 +128,36 @@ function loadTasks() {
 
 
 // Listen for Auth State Changes
-auth.onAuthStateChanged((user) => {
-  const userNameElement = document.getElementById("user-name");
-  const profilePicElement = document.getElementById("profile-pic");
-  const userInfoElement = document.getElementById("user-info");
 
-  if (user) {
-      // User is logged in
-      console.log("User is logged in:", user);
-      login_btn.style.display = "none";
-      logout_btn.style.display = "block";
-      
-      // Display user name and profile picture
-      userNameElement.textContent = user.displayName || "User"; // Fallback if displayName is null
-      profilePicElement.src = user.photoURL || "assets/td-3.jpg"; // Fallback for profile picture
-      userInfoElement.style.display = "flex"; // Show the user info section
+window.addEventListener("load", () => {
 
-      loadTasks(); // Load tasks when the user is logged in
-  } else {
-      // No user is logged in
-      console.log("No user is logged in.");
-      login_btn.style.display = "block";
-      logout_btn.style.display = "none";
-      userInfoElement.style.display = "none"; // Hide the user info section
-      todo_list.innerHTML = ""; // Clear the task list when logged out
-  }
+    auth.onAuthStateChanged((user) => {
+      const userNameElement = document.getElementById("user-name");
+      const profilePicElement = document.getElementById("profile-pic");
+      const userInfoElement = document.getElementById("user-info");
+    
+      if (user) {
+          // User is logged in
+          console.log("User is logged in:", user);
+          login_btn.style.display = "none";
+          logout_btn.style.display = "block";
+          
+          // Display user name and profile picture
+          userNameElement.textContent = user.displayName || "User"; // Fallback if displayName is null
+          profilePicElement.src = user.photoURL || "assets/td-3.jpg"; // Fallback for profile picture
+          userInfoElement.style.display = "flex"; // Show the user info section
+    
+          loadTasks(); // Load tasks when the user is logged in
+      } else {
+          // No user is logged in
+          console.log("No user is logged in.");
+          login_btn.style.display = "block";
+          logout_btn.style.display = "none";
+          userInfoElement.style.display = "none"; // Hide the user info section
+          todo_list.innerHTML = ""; // Clear the task list when logged out
+      }
+    });
+    
 });
 
 
