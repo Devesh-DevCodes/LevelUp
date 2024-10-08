@@ -1,18 +1,20 @@
 {
-    "name": "Dream Chaser",
+    "name": "DevCoder's Todo App",
     "short_name": "Dream Chaser",
-    "version":"0.0.1",
-    "manifest_version":3,
-    "action":{
-        "default_popup":"index.html",
-        "default_icon":"favicon_io/logo-121x128.png"
-
-    },
-    "permissions":["activeTab"],
-
-    "icons": 
+    "icons": [
       {
-        "128":"favicon_io/logo-121x128.png"
+        "src": "favicon_io/android-chrome-192x192.png",
+        
+        "sizes": "192x192",
+        "type": "image/png"
+      },
+      {
+        "src": "favicon_io/android-chrome-512x512.png",
+        "sizes": "512x512",
+        "type": "image/png"
       }
-  }
-  
+    ],
+    "theme_color": "#6607aed3",
+    "background_color": "#6607aed3",
+    "display": "standalone"
+}
