@@ -1,3 +1,36 @@
  Progressive Web App (PWA)
 
 https://console.firebase.google.com/u/0/project/to-do-44e4/database/to-do-44e4-default-rtdb/data
+https://chatgpt.com/c/6748868e-4df0-8010-aa42-3a65aa94182d
+
+
+
+
+
+// Import the functions you need from the SDKs you need
+import { initializeApp } from "firebase/app";
+import { getAnalytics } from "firebase/analytics";
+// TODO: Add SDKs for Firebase products that you want to use
+// https://firebase.google.com/docs/web/setup#available-libraries
+
+// Your web app's Firebase configuration
+// For Firebase JS SDK v7.20.0 and later, measurementId is optional
+const firebaseConfig = {
+  apiKey: "AIzaSyBIL24eNCtT0ZiRacx8BJ7Ha6b05LpQYqc",
+  authDomain: "devcodes-todo-app.firebaseapp.com",
+  projectId: "devcodes-todo-app",
+  storageBucket: "devcodes-todo-app.appspot.com",
+  messagingSenderId: "754958160845",
+  appId: "1:754958160845:web:b87bdc299e85650653ea84",
+  measurementId: "G-Y2F0EFZVXM"
+};
+
+// Initialize Firebase
+const app = initializeApp(firebaseConfig);
+const analytics = getAnalytics(app);
+
+
+https://chatgpt.com/c/67037844-b3b8-8010-bd90-cae09e9da772
+https://chatgpt.com/c/67049c1a-b294-8010-91e0-2f83790b859e
+
+This manifest.json file is well-formed and describes key metadata for a Progressive Web App (PWA)

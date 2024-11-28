@@ -1,15 +1,59 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Offline</title>
-    <link rel="stylesheet" href="styles.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>You're Offline</title>
+  <style>
+    body {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      height: 100vh;
+      background-color: #f0f0f0;
+      font-family: 'Arial', sans-serif;
+      margin: 0;
+    }
+
+    .logo {
+      width: 150px;
+      height: 150px;
+      margin-bottom: 20px;
+    }
+
+    h1 {
+      font-size: 2rem;
+      color: #333;
+    }
+
+    p {
+      font-size: 1.2rem;
+      color: #666;
+      margin: 10px 0 20px;
+    }
+
+    .retry {
+      padding: 10px 20px;
+      background-color: #6607aed3;
+      color: #fff;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      font-size: 1rem;
+      text-transform: uppercase;
+    }
+
+    .retry:hover {
+      background-color: #4e0591;
+    }
+  </style>
 </head>
 <body>
-    <h1>You're offline</h1>
-    <p>It seems you're not connected to the internet. Please check your connection and try again.</p>
-    <a href="/">Go back home</a>
+  <img src="assets/td-3.jpg" alt="Logo" class="logo">
+  <h1>You're Offline</h1>
+  <p>It seems like you lost your internet connection. Please check your connection and try again.</p>
+  <button class="retry" onclick="window.location.reload()">Retry</button>
 </body>
 </html>

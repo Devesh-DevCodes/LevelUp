@@ -1,0 +1,10 @@
+# Ignore Visual Studio Code settings folder
+.vscode/
+
+# Ignore temporary or personal text files
+txt.txt
+
+# macOS-specific system files
+.DS_Store
+
+.
