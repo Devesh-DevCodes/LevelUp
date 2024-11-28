@@ -1,3 +1,18 @@
+// Check if the browser supports service workers
+if ('serviceWorker' in navigator) {
+    // Register the service worker
+    window.addEventListener('load', () => {
+      navigator.serviceWorker.register('/service-worker.js', { scope: '/' })
+        .then((registration) => {
+          console.log('Service Worker registered with scope: ', registration.scope);
+        })
+        .catch((error) => {
+          console.log('Service Worker registration failed: ', error);
+        });
+    });
+  }
+    
+
 // Import the functions you need from the SDKs you need
 import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
 import { getFirestore, collection, addDoc,  onSnapshot, deleteDoc,query,where , orderBy , enableIndexedDbPersistence} from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js"; 
