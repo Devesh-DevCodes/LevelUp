@@ -48,12 +48,7 @@ login_btn.addEventListener("click", async () => {
       logout_btn.style.display = "block";
       loadTasks();
   } catch (error) {
-      if (error.code === 'auth/popup-closed-by-user') {
-          console.warn("The authentication popup was closed by the user.");
-          alert("The login popup was closed. Please try again.");
-      } else {
-          console.error("Error during login: ", error);
-      }
+      console.error("Error during login: ", error);
   }
 });
 
